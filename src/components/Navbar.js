@@ -1,4 +1,4 @@
-import { AppBar, List, makeStyles, Toolbar, IconButton, Drawer, Divider } from '@material-ui/core'
+import { AppBar, List, makeStyles, Toolbar, IconButton, Drawer, Divider, ListItem, ListItemIcon } from '@material-ui/core'
 import React, { useState } from 'react'
 import logo from '../images/logo.png'
 import {Link, animateScroll as scroll} from 'react-scroll'
@@ -10,22 +10,22 @@ const menu = [
     {
         id: "about",
         text: "About me",
-        icon: <InfoTwoTone/>
+        icon: <InfoTwoTone fontSize='large'/>
     },
     {
         id: "skills",
         text: "Skills",
-        icon: <EmojiObjectsTwoTone/>
+        icon: <EmojiObjectsTwoTone fontSize='large'/>
     },
     {
         id: "work",
         text: "My Work",
-        icon: <BuildTwoTone/>
+        icon: <BuildTwoTone fontSize='large'/>
     }, 
     {
         id: "contact",
         text: "Contact me",
-        icon: <ContactMailTwoTone/>
+        icon: <ContactMailTwoTone fontSize='large'/>
     }, 
 ]
 
@@ -52,19 +52,37 @@ const Navbar = () => {
                         ))
                     }
                 </List>
-                <IconButton edge="end" className={classes.menuButton} onClick={()=> setOpen(true)}>
+                <IconButton edge="end" className={classes.menuButton} onClick={()=> setOpen(!open)}>
                     <Menu fontSize= "large"/>
                 </IconButton>
                 
             </Toolbar>
         </AppBar>
-        <Drawer anchor="right" open={open} onClose={()=>setOpen(false)}>
-            <IconButton className={classes.closeMenu} onClick={()=>setOpen(false)}>
-                    <Cancel/>        
+        
+        <Drawer  anchor="right" open={open} onClose={()=>setOpen(false)}>
+            <IconButton onClick={()=>setOpen(false)}>
+                    <Cancel fontSize = "large"  className={classes.cancelMenu} />        
             </IconButton>
-            <Divider>
-                
-            </Divider>
+            <Divider/>
+            {   
+                        menu.map(({id, text, icon}, index) =>(
+                            <Link key={index} 
+                                className={classes.sidebar}
+                                to={id} 
+                                spy={true} 
+                                activeClass="active" 
+                                smooth={true} 
+                                duration={500} 
+                                offset={-64}>
+                                    <ListItem component="h5">
+                                        <span>
+                                            <ListItemIcon>{icon}</ListItemIcon>                                       
+                                        </span>
+                                        {text}
+                                    </ListItem>
+                            </Link>
+                        ))
+                    }            
         </Drawer>
     </>
   )
@@ -114,9 +132,32 @@ const useStyles = makeStyles((theme)=> ({
             right: 10
         },
     },
-    closeMenu:{
-
+    cancelMenu: {
+        color: "tomato",
+        position: "absolute",
+        top: 0,
+        left: 10,
+        
     },
+    sidebar: {
+        /*ojito*/
+        border: "solid 2px",
+        width: "40vw",
+        [theme.breakpoints.down("sm")]: {
+            width: "60vs",
+        },
+        "& h5":{
+            margin: theme.spacing(2, 0, 0, 2),
+            fontSize: "1.4rem",
+            color: "#333",
+            fontWeigth: "bold"
+        }, 
+        "& h5:hover":{
+            color: "tomato",
+            cursor: "pointer",
+        },
+    },
+    
     logo: {
         height: "2rem",
         objectFit: "contain",

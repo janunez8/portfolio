@@ -16,7 +16,7 @@ function App() {
     <div className={classes.root}>
       <Navbar id='navbar'/>
       <About title='Aboute me' id='about' dark={true}/>
-      <Skills title='My skilss' id='skills' dark={false}/>
+      <Skills title='My skills' id='skills' dark={false}/>
       <Work title='My work' id='work' dark={true}/>
       <Contact title='Get touch' id='contact' dark={false}/>
     </div>
