@@ -2,7 +2,8 @@ import { Card, CardMedia, CardContent, makeStyles, Typography, CardActions } fro
 import React from 'react'
 import image from '../images/imageMe.jpg'
 import TypeWriterEffect from 'react-typewriter-effect'
-import { Button } from 'react-scroll/modules';
+import { Button} from 'react-bootstrap';
+import cvdownload from '../images/Ev1B_AA.pdf'
 
 const About = ({title, dark, id}) => {
   const classes = useStyles();
@@ -28,10 +29,18 @@ const About = ({title, dark, id}) => {
                         typeSpeed={100}/>  
                     </CardContent>
                     <CardActions>
-                        <button text="Download CV"/>
+                        <Button variant="contained" className={classes.button}>
+                            <a href={cvdownload} download>
+                                DownloadCV    
+                            </a>
+                       
+                        </Button>
                     </CardActions>
+                    
             </Card>
+            
         </div>
+        
     </div>
   )
 }
@@ -66,6 +75,9 @@ const useStyles = makeStyles((theme)=> ({
     },
     cardContent: {
         
+    },
+    button: {
+
     },
   }))
 
